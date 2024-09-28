@@ -22,6 +22,7 @@ function Install-BuildDependencies {
         'x64' = ${Env:ProgramFiles}
         'x86' = ${Env:ProgramFiles(x86)}
         'arm64' = ${Env:ProgramFiles(arm)}
+        'appdata-x64' = ${Env:LOCALAPPDATA}+"\Programs"
     }
 
     $Paths = $Env:Path -split [System.IO.Path]::PathSeparator
@@ -39,9 +40,9 @@ function Install-BuildDependencies {
         $Prefixes.GetEnumerator() | ForEach-Object {
             $Prefix = $_.value
             $FullPath = "${Prefix}\${Path}"
+            Log-Debug "Checking for ${FullPath}"
             if ( ( Test-Path $FullPath  ) -and ! ( $Paths -contains $FullPath ) ) {
-                $Paths = @($FullPath) + $Paths
-                $Env:Path = $Paths -join [System.IO.Path]::PathSeparator
+                $Env:Path += [System.IO.Path]::PathSeparator+$FullPath
             }
         }
 
@@ -60,7 +61,25 @@ function Install-BuildDependencies {
             try {
                 $Params = $WingetOptions + $Package
 
+                Log-Status "Executing winget ${Params}"
                 winget @Params
+                
+                if($Binary){
+                    Log-Status "Adding ${Package} to PATH ${FullPath}"
+                    $Prefixes.GetEnumerator() | ForEach-Object {
+                        $Prefix = $_.value
+                        $FullPath = "${Prefix}\${Path}"
+                        if ( ( Test-Path $FullPath  ) -and ! ( $Paths -contains $FullPath ) ) {
+                            $current_env_path = [Environment]::GetEnvironmentVariable("PATH", [EnvironmentVariableTarget]::User)
+                            $new_env_path = $current_env_path
+                            if( !$new_env_path.EndsWith(";")){
+                                $new_env_path += ${[System.IO.Path]::PathSeparator}
+                            }
+                            $new_env_path += $FullPath
+                            [Environment]::SetEnvironmentVariable("PATH",$new_env_path, [EnvironmentVariableTarget]::User)
+                        }
+                    }
+                }
             } catch {
                 throw "Error while installing winget package ${Package}: $_"
             }
