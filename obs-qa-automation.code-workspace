@@ -1,0 +1,40 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "C:/Program Files/obs-studio/data/obs-plugins"
+		},
+		{
+			"path": "C:/Users/npats/AppData/Roaming/obs-studio"
+		}
+	],
+	"settings": {
+		"terminal.integrated.profiles.windows": {
+
+			"PowerShell": {
+				"source": "PowerShell",
+				"icon": "terminal-powershell",
+				"args": ["-ExecutionPolicy", "Bypass"]
+			},
+			"Command Prompt": {
+				"path": [
+					"${env:windir}\\Sysnative\\cmd.exe",
+					"${env:windir}\\System32\\cmd.exe"
+				],
+				"args": [],
+				"icon": "terminal-cmd"
+			},
+			"Git Bash": {
+				"source": "Git Bash"
+			}
+		},
+		"files.associations": {
+			"*.aiken.txt": "aiken",
+			"*.gift.txt": "gift",
+			"qmainwindow": "c",
+			"xstring": "cpp"
+		}
+	}
+}
