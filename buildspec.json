@@ -33,16 +33,16 @@
     },
     "platformConfig": {
         "macos": {
-            "bundleId": "com.example.obs-plugintemplate"
+            "bundleId": "com.npatch.obs-qa-automation"
         }
     },
-    "name": "obs-plugintemplate",
-    "displayName": "OBS Plugin Template",
-    "version": "1.0.0",
-    "author": "Your Name Here",
-    "website": "https://example.com",
-    "email": "me@example.com",
+    "name": "obs-qa-automation",
+    "displayName": "OBS QA Automation",
+    "version": "0.0.1",
+    "author": "Nikolaos Patsiouras",
+    "website": "https://github.com/NPatch/obs-qa-automation",
+    "email": "npatsiouras@gmail.com",
     "uuids": {
-        "windowsApp": "00000000-0000-0000-0000-000000000000"
+        "windowsApp": "30FDC6F2-D51C-4747-90CC-5DFE75C372B9"
     }
 }
