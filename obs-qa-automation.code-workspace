@@ -25,16 +25,8 @@
 				],
 				"args": [],
 				"icon": "terminal-cmd"
-			},
-			"Git Bash": {
-				"source": "Git Bash"
 			}
 		},
-		"files.associations": {
-			"*.aiken.txt": "aiken",
-			"*.gift.txt": "gift",
-			"qmainwindow": "c",
-			"xstring": "cpp"
-		}
+		"git.enabled": false
 	}
 }
