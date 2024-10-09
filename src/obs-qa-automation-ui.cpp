@@ -4,6 +4,11 @@
 
 #define TIMER_INTERVAL 2000
 
+void OBSQAAutomation::DebugMessage(QWidget* parent, const char* format)
+{
+	QMessageBox::information(parent, "Info", format);
+}
+
 bool CompareLineEditWithConfig(QLineEdit*& widget, const char* value){
 	return strcmp(widget->text().toStdString().c_str(), value) == 0;
 }
@@ -80,7 +85,8 @@ OBSQAAutomation::~OBSQAAutomation() {
 
 void OBSQAAutomation::ButtonClicked() 
 {
-	QMessageBox::information(this, "Info", "You just clicked on the box version 2!");
+	DebugMessage(this, "You just clicked on the box version 2!");
+	// QMessageBox::information(this, "Info", "You just clicked on the box version 2!");
 }
 
 void OBSQAAutomation::Reset()

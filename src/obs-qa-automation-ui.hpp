@@ -50,6 +50,8 @@ public:
 	void SetSettings(obs_data_t* settings);
 	obs_data_t* GetSettings();
 
+	static void DebugMessage(QWidget* parent, const char* format);
+
 private:
 	void createGridStringProperty(QLabel*& lb, const char* lb_text, QLineEdit*& le, QGridLayout*& layout, int row);
 
