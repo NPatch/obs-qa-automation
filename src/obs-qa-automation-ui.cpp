@@ -75,8 +75,6 @@ OBSQAAutomation::OBSQAAutomation(QWidget *parent, bool closable)
 
 	if (isVisible())
 		timer.start();
-
-	Update();
 }
 
 OBSQAAutomation::~OBSQAAutomation() {
