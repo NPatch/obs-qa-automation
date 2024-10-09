@@ -35,7 +35,16 @@
 		"git.enabled": false,
 		"livePreview.autoRefreshPreview": "Never",
 		"editor.formatOnSave": true,
-		"editor.defaultFormatter": "xaver.clang-format"
+		"editor.defaultFormatter": "xaver.clang-format",
+		"C_Cpp.clang_format_fallbackStyle": "Visual Studio",
+		"C_Cpp.formatting": "default",
+		"C_Cpp.vcFormat.newLine.beforeOpenBrace.function": "newLine",
+		"C_Cpp.vcFormat.newLine.beforeOpenBrace.block": "newLine",
+		"C_Cpp.vcFormat.newLine.beforeOpenBrace.namespace": "newLine",
+		"C_Cpp.vcFormat.newLine.beforeOpenBrace.type": "newLine",
+		"C_Cpp.vcFormat.newLine.closeBraceSameLine.emptyFunction": true,
+		"C_Cpp.vcFormat.newLine.closeBraceSameLine.emptyType": true,
+		"C_Cpp.vcFormat.newLine.scopeBracesOnSeparateLines": true
 	},
 	"extensions": {
 		"recommendations": [
