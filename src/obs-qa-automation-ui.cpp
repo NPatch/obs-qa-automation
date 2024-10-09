@@ -35,7 +35,7 @@ void OBSQAAutomation::createGridStringProperty(QLabel *&lb, const char *lb_text,
 			 &OBSQAAutomation::Update);
 }
 
-OBSQAAutomation::OBSQAAutomation(QWidget *parent, bool closable)
+OBSQAAutomation::OBSQAAutomation(QWidget *parent)
 	: QFrame(parent),
 	  timer(this)
 {

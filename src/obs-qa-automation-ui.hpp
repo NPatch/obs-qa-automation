@@ -41,7 +41,7 @@ class OBSQAAutomation : public QFrame
 	QTimer timer;
 
 public:
-	OBSQAAutomation(QWidget *parent = nullptr, bool closable = true);
+	OBSQAAutomation(QWidget *parent = nullptr);
 	~OBSQAAutomation();
 
 	static void InitializeValues();
