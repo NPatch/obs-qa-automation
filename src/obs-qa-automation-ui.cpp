@@ -77,8 +77,22 @@ OBSQAAutomation::OBSQAAutomation(QWidget *parent, bool closable)
 		timer.start();
 }
 
-OBSQAAutomation::~OBSQAAutomation() {
+OBSQAAutomation::~OBSQAAutomation() 
+{
+	QObject::disconnect(start_qa_btn, &QPushButton::clicked, this, &OBSQAAutomation::ButtonClicked);
+	timer.stop();
+	QObject::disconnect(&timer, &QTimer::timeout, this,
+			 &OBSQAAutomation::Update);
 
+
+	QObject::disconnect(scene_name_te, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
+	QObject::disconnect(source_name_te, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
+	QObject::disconnect(steam_gameid_te, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
+	QObject::disconnect(exe_name_te, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
+	QObject::disconnect(window_name_te, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
+	QObject::disconnect(window_class_te, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
+	QObject::disconnect(crash_window_name_te, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
+	QObject::disconnect(crash_window_class_te, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
 }
 
 void OBSQAAutomation::ButtonClicked() 
