@@ -51,12 +51,11 @@ public:
 	obs_data_t* GetSettings();
 
 private:
-	void buttonClicked();
-	void Update();
 	void createGridStringProperty(QLabel*& lb, const char* lb_text, QLineEdit*& le, QGridLayout*& layout, int row);
 
 private slots:
 	void ButtonClicked();
+	void Update();
 
 public slots:
 	void Reset();
