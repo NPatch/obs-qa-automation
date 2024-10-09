@@ -65,8 +65,8 @@ bool obs_module_load(void)
 		obs_data_set_string(data, "exe_name", "");
 		obs_data_set_string(data, "window_name", "");
 		obs_data_set_string(data, "window_class", "");
-		obs_data_set_string(data, "class_window_name", "");
-		obs_data_set_string(data, "class_window_class", "");
+		obs_data_set_string(data, "crash_window_name", "");
+		obs_data_set_string(data, "crash_window_class", "");
 		obs_data_save_json(data, settings_json);
 	}
 	
