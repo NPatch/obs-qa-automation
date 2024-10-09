@@ -33,13 +33,14 @@ OBS_MODULE_USE_DEFAULT_LOCALE(PLUGIN_NAME, "en-US")
 
 #define CONFIG_FILE "obs_qa_automation.json"
 
-OBSDataAutoRelease config_settings;
+obs_data_t* config_settings;
+OBSQAAutomation* widget;
 
 bool obs_module_load(void)
 {
 	QWidget *main_window = (QWidget *)obs_frontend_get_main_window();
 	obs_frontend_push_ui_translation(obs_module_get_string);
-	QWidget *testWidget = new OBSQAAutomation(main_window);
+	widget = new OBSQAAutomation(main_window);
 	obs_frontend_add_dock_by_id(
 		"obs-qa-automation",
 		testWidget->windowTitle().toStdString().c_str(), testWidget);
@@ -74,7 +75,7 @@ bool obs_module_load(void)
 		const char* data_str = obs_data_get_json_pretty(config_settings);
 		obs_log(LOG_INFO, "plugin settings: %s", data_str);
 
-		//((OBSQAAutomation*)testWidget)->SetSettings(config_settings);
+		widget->SetSettings(config_settings);
 	}
 	bfree(settings_json);
 
@@ -87,6 +88,8 @@ void obs_module_unload(void)
 	char* settings_json = obs_module_config_path(CONFIG_FILE);
 	obs_data_save_json(config_settings, settings_json);
 	bfree(settings_json);
+	widget->Reset();
+	obs_data_release(config_settings);
 }
 
 const char *obs_module_name(void)
