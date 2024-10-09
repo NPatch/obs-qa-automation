@@ -104,8 +104,8 @@ void OBSQAAutomation::SetSettings(obs_data_t* settings){
 		config_data = nullptr;
 	}
 
-	obs_data_addref(settings);
 	config_data = settings;
+	obs_data_addref(config_data);
 
 	if(config_data == nullptr){
 		obs_log(LOG_INFO, "ConfigData is null");
