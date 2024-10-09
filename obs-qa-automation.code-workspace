@@ -30,6 +30,7 @@
 				"icon": "terminal-cmd"
 			}
 		},
-		"git.enabled": false
+		"git.enabled": false,
+		"livePreview.autoRefreshPreview": "Never",
 	}
 }
