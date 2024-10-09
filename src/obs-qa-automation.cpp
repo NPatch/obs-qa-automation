@@ -19,7 +19,6 @@ with this program. If not, see <https://www.gnu.org/licenses/>
 #include <obs-module.h>
 #include <plugin-support.h>
 
-// #include "../.deps/obs-deps-2024-03-19-x64/include/jansson.h"
 #include <util/platform.h>
 #include <obs.h>
 #include <obs.hpp>
@@ -67,6 +66,16 @@ bool obs_module_load(void)
 		obs_data_set_string(data, "window_class", "");
 		obs_data_set_string(data, "crash_window_name", "");
 		obs_data_set_string(data, "crash_window_class", "");
+
+		// obs_data_set_string(data, "scene_name", "Old Skies Scene");
+		// obs_data_set_string(data, "source_name", "Old Skies");
+		// obs_data_set_string(data, "steam_gameid", "1346360");
+		// obs_data_set_string(data, "exe_name", "OldSkies.exe");
+		// obs_data_set_string(data, "win_name", "Old Skies");
+		// obs_data_set_string(data, "win_class", "SDL_app");
+		// obs_data_set_string(data, "crash_win_name", "Adventure Game Studio");
+		// obs_data_set_string(data, "crash_win_class", "#32770");
+		
 		obs_data_save_json(data, settings_json);
 	}
 	
@@ -74,7 +83,6 @@ bool obs_module_load(void)
 		config_settings = obs_data_create_from_json_file(settings_json);
 		const char* data_str = obs_data_get_json_pretty(config_settings);
 		obs_log(LOG_INFO, "plugin settings: %s", data_str);
-
 		widget->SetSettings(config_settings);
 	}
 	bfree(settings_json);
