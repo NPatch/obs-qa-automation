@@ -14,8 +14,6 @@ class OBSQAAutomation : public QFrame
 {
 	Q_OBJECT
 
-	// QWidget *parent = nullptr;
-
 	QLabel *scene_name_lb = nullptr;
 	QLabel *source_name_lb = nullptr;
 	QLabel *steam_gameid_lb = nullptr;

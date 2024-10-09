@@ -35,9 +35,7 @@ void OBSQAAutomation::createGridStringProperty(QLabel *&lb, const char *lb_text,
 			 &OBSQAAutomation::Update);
 }
 
-OBSQAAutomation::OBSQAAutomation(QWidget *parent)
-	: QFrame(parent),
-	  timer(this)
+OBSQAAutomation::OBSQAAutomation(QWidget *parent) : QFrame(parent), timer(this)
 {
 	QGridLayout *mainLayout = new QGridLayout();
 
