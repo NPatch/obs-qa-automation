@@ -43,9 +43,9 @@ OBSQAAutomation::OBSQAAutomation(QWidget *parent, bool closable)
 	}
 
 	//StartQA button
-	this->start_qa_btn = new QPushButton();
-	this->start_qa_btn->setText("Start QA");
-	mainLayout->addWidget(this->start_qa_btn);
+	start_qa_btn = new QPushButton();
+	start_qa_btn->setText("Start QA");
+	mainLayout->addWidget(start_qa_btn, 8, 0, 1, 2);
 
 	setLayout(mainLayout);
 	resize(300, 300);
