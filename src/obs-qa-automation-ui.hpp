@@ -1,8 +1,6 @@
 #ifndef OBS_QA_AUTOMATION_UI_H
 #define OBS_QA_AUTOMATION_UI_H
 
-// #include <QFrame>
-#include <QWidget>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
