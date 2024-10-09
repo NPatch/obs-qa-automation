@@ -38,12 +38,12 @@ OBSQAAutomation* widget;
 bool obs_module_load(void)
 {
 	QWidget *main_window = (QWidget *)obs_frontend_get_main_window();
-	obs_frontend_push_ui_translation(obs_module_get_string);
+	//obs_frontend_push_ui_translation(obs_module_get_string);
 	widget = new OBSQAAutomation(main_window);
 	obs_frontend_add_dock_by_id(
 		"obs-qa-automation",
-		testWidget->windowTitle().toStdString().c_str(), testWidget);
-	obs_frontend_pop_ui_translation();
+		widget->windowTitle().toStdString().c_str(), widget);
+	//obs_frontend_pop_ui_translation();
 
 	obs_log(LOG_INFO, "plugin loaded successfully (version %s)",
 		PLUGIN_VERSION);
@@ -57,6 +57,7 @@ bool obs_module_load(void)
 	char* settings_json = obs_module_config_path(CONFIG_FILE);
 	if(!os_file_exists(settings_json)){
 
+		obs_log(LOG_INFO,"%s does not exist", settings_json);
 		OBSDataAutoRelease data = obs_data_create();
 		obs_data_set_string(data, "scene_name", "");
 		obs_data_set_string(data, "source_name", "");
@@ -77,6 +78,8 @@ bool obs_module_load(void)
 		// obs_data_set_string(data, "crash_win_class", "#32770");
 		
 		obs_data_save_json(data, settings_json);
+
+		obs_log(LOG_INFO, "Created new settings file");
 	}
 	
 	if(os_file_exists(settings_json)){
