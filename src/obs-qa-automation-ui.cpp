@@ -4,80 +4,42 @@
 
 #define TIMER_INTERVAL 2000
 
+void OBSQAAutomation::createGridStringProperty(QLabel*& lb, const char* lb_text, QLineEdit*& le, QGridLayout*& layout, int row)
+{
+	lb = new QLabel(lb_text);
+	le = new QLineEdit("");
+
+	layout->addWidget(lb, row, 0);
+	layout->addWidget(le, row, 1);
+
+	QObject::connect(le, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
+}
+
 OBSQAAutomation::OBSQAAutomation(QWidget *parent, bool closable) 
 		: QFrame(parent),
 		timer(this)
 {
 	this->parent = parent;
 
-	QVBoxLayout *mainLayout = new QVBoxLayout();
+	QGridLayout *mainLayout = new QGridLayout();
 
-	{//Labels
-		{//Scene Name
-			QHBoxLayout* hor_layout = new QHBoxLayout();
-			
-			this->scene_name_lb = new QLabel("Scene Name");
-			hor_layout->addWidget(this->scene_name_lb);
-
-			this->scene_name_te = new QPlainTextEdit("");
-			hor_layout->addWidget(this->scene_name_te);
-
-			mainLayout->addLayout(hor_layout);
-		}
-
-		{//Source Name
-			QHBoxLayout* hor_layout = new QHBoxLayout();
-
-			this->source_name_lb = new QLabel("Source Name");
-			hor_layout->addWidget(this->source_name_lb);
-			
-			this->source_name_te = new QPlainTextEdit("");
-			hor_layout->addWidget(this->source_name_te);
-			
-			mainLayout->addLayout(hor_layout);
-		}
-
-		{//Steam GameID
-			QHBoxLayout* hor_layout = new QHBoxLayout();
-			this->steam_gameid_lb = new QLabel("Steam GameID");
-			hor_layout->addWidget(this->steam_gameid_lb);
-			mainLayout->addLayout(hor_layout);
-		}
-
-		{//Exe Name
-			QHBoxLayout* hor_layout = new QHBoxLayout();
-			this->exe_name_lb = new QLabel("Executable Name");
-			hor_layout->addWidget(this->exe_name_lb);
-			mainLayout->addLayout(hor_layout);
-		}
-
-		{//Window Name
-			QHBoxLayout* hor_layout = new QHBoxLayout();
-			this->window_name_lb = new QLabel("Window Name");
-			hor_layout->addWidget(this->window_name_lb);
-			mainLayout->addLayout(hor_layout);
-		}
-
-		{//Window Class
-			QHBoxLayout* hor_layout = new QHBoxLayout();
-			this->window_class_lb = new QLabel("Window Class");
-			hor_layout->addWidget(this->window_class_lb);
-			mainLayout->addLayout(hor_layout);
-		}
-
-		{//Crash Window Name
-			QHBoxLayout* hor_layout = new QHBoxLayout();
-			this->crash_window_name_lb = new QLabel("Crash Window Name");
-			hor_layout->addWidget(this->crash_window_name_lb);
-			mainLayout->addLayout(hor_layout);
-		}
-
-		{//Crash Window Class
-			QHBoxLayout* hor_layout = new QHBoxLayout();
-			this->crash_window_class_lb = new QLabel("Crash Window Class");
-			hor_layout->addWidget(this->crash_window_class_lb);
-			mainLayout->addLayout(hor_layout);
-		}
+	{//Properties
+		//Scene Name
+		createGridStringProperty(scene_name_lb, "Scene Name", scene_name_te, mainLayout, 0);
+		//Source Name
+		createGridStringProperty(source_name_lb, "Source Name", source_name_te, mainLayout, 1);
+		//Steam GameID
+		createGridStringProperty(steam_gameid_lb, "Steam GameID", steam_gameid_te, mainLayout, 2);
+		//Exe Name
+		createGridStringProperty(exe_name_lb, "Executable Name", exe_name_te, mainLayout, 3);
+		//Window Name
+		createGridStringProperty(window_name_lb, "Window Name", window_name_te, mainLayout, 4);
+		//Window Class
+		createGridStringProperty(window_class_lb, "Window Class", window_class_te, mainLayout, 5);
+		//Crash Window Name
+		createGridStringProperty(crash_window_name_lb, "Crash Window Name", crash_window_name_te, mainLayout, 6);
+		//Crash Window Class
+		createGridStringProperty(crash_window_class_lb, "Crash Window Class", crash_window_class_te, mainLayout, 7);
 	}
 
 	//StartQA button

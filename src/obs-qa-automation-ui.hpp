@@ -4,10 +4,9 @@
 #include <QFrame>
 #include <QWidget>
 #include <QLabel>
-#include <QPlainTextEdit>
+#include <QLineEdit>
 #include <QPushButton>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
+#include <QGridLayout>
 #include <QTimer>
 #include <QMessageBox>
 
@@ -28,14 +27,14 @@ class OBSQAAutomation : public QFrame
 	QLabel* crash_window_name_lb = nullptr;
 	QLabel* crash_window_class_lb = nullptr;
 
-	QPlainTextEdit* scene_name_te = nullptr;
-	QPlainTextEdit* source_name_te = nullptr;
-	QPlainTextEdit* steam_gameid_te = nullptr;
-	QPlainTextEdit* exe_name_te = nullptr;
-	QPlainTextEdit* window_name_te = nullptr;
-	QPlainTextEdit* window_class_te = nullptr;
-	QPlainTextEdit* crash_window_name_te = nullptr;
-	QPlainTextEdit* crash_window_class_te = nullptr;
+	QLineEdit* scene_name_te = nullptr;
+	QLineEdit* source_name_te = nullptr;
+	QLineEdit* steam_gameid_te = nullptr;
+	QLineEdit* exe_name_te = nullptr;
+	QLineEdit* window_name_te = nullptr;
+	QLineEdit* window_class_te = nullptr;
+	QLineEdit* crash_window_name_te = nullptr;
+	QLineEdit* crash_window_class_te = nullptr;
 
 	QPushButton* start_qa_btn = nullptr;
 
@@ -54,6 +53,7 @@ public:
 private:
 	void buttonClicked();
 	void Update();
+	void createGridStringProperty(QLabel*& lb, const char* lb_text, QLineEdit*& le, QGridLayout*& layout, int row);
 
 private slots:
 	void ButtonClicked();
