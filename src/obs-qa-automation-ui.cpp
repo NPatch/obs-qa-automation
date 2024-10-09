@@ -39,8 +39,6 @@ OBSQAAutomation::OBSQAAutomation(QWidget *parent, bool closable)
 	: QFrame(parent),
 	  timer(this)
 {
-	this->parent = parent;
-
 	QGridLayout *mainLayout = new QGridLayout();
 
 	{ //Properties
