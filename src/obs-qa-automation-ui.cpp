@@ -4,23 +4,26 @@
 
 #define TIMER_INTERVAL 2000
 
-void OBSQAAutomation::DebugMessage(QWidget* parent, const char* format)
+void OBSQAAutomation::DebugMessage(QWidget *parent, const char *format)
 {
 	QMessageBox::information(parent, "Info", format);
 }
 
-bool CompareLineEditWithConfig(QLineEdit*& widget, const char* value){
+bool CompareLineEditWithConfig(QLineEdit *&widget, const char *value)
+{
 	return strcmp(widget->text().toStdString().c_str(), value) == 0;
 }
 
-void SetTextWithoutNotifying(QLineEdit*& widget, const char* value)
+void SetTextWithoutNotifying(QLineEdit *&widget, const char *value)
 {
 	const QSignalBlocker blocker(widget);
 	widget->setText(value);
 	widget->setCursorPosition(0);
 }
 
-void OBSQAAutomation::createGridStringProperty(QLabel*& lb, const char* lb_text, QLineEdit*& le, QGridLayout*& layout, int row)
+void OBSQAAutomation::createGridStringProperty(QLabel *&lb, const char *lb_text,
+					       QLineEdit *&le,
+					       QGridLayout *&layout, int row)
 {
 	lb = new QLabel(lb_text);
 	le = new QLineEdit("");
@@ -28,34 +31,45 @@ void OBSQAAutomation::createGridStringProperty(QLabel*& lb, const char* lb_text,
 	layout->addWidget(lb, row, 0);
 	layout->addWidget(le, row, 1);
 
-	QObject::connect(le, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
+	QObject::connect(le, &QLineEdit::textChanged, this,
+			 &OBSQAAutomation::Update);
 }
 
-OBSQAAutomation::OBSQAAutomation(QWidget *parent, bool closable) 
-		: QFrame(parent),
-		timer(this)
+OBSQAAutomation::OBSQAAutomation(QWidget *parent, bool closable)
+	: QFrame(parent),
+	  timer(this)
 {
 	this->parent = parent;
 
 	QGridLayout *mainLayout = new QGridLayout();
 
-	{//Properties
+	{ //Properties
 		//Scene Name
-		createGridStringProperty(scene_name_lb, "Scene Name", scene_name_te, mainLayout, 0);
+		createGridStringProperty(scene_name_lb, "Scene Name",
+					 scene_name_te, mainLayout, 0);
 		//Source Name
-		createGridStringProperty(source_name_lb, "Source Name", source_name_te, mainLayout, 1);
+		createGridStringProperty(source_name_lb, "Source Name",
+					 source_name_te, mainLayout, 1);
 		//Steam GameID
-		createGridStringProperty(steam_gameid_lb, "Steam GameID", steam_gameid_te, mainLayout, 2);
+		createGridStringProperty(steam_gameid_lb, "Steam GameID",
+					 steam_gameid_te, mainLayout, 2);
 		//Exe Name
-		createGridStringProperty(exe_name_lb, "Executable Name", exe_name_te, mainLayout, 3);
+		createGridStringProperty(exe_name_lb, "Executable Name",
+					 exe_name_te, mainLayout, 3);
 		//Window Name
-		createGridStringProperty(window_name_lb, "Window Name", window_name_te, mainLayout, 4);
+		createGridStringProperty(window_name_lb, "Window Name",
+					 window_name_te, mainLayout, 4);
 		//Window Class
-		createGridStringProperty(window_class_lb, "Window Class", window_class_te, mainLayout, 5);
+		createGridStringProperty(window_class_lb, "Window Class",
+					 window_class_te, mainLayout, 5);
 		//Crash Window Name
-		createGridStringProperty(crash_window_name_lb, "Crash Window Name", crash_window_name_te, mainLayout, 6);
+		createGridStringProperty(crash_window_name_lb,
+					 "Crash Window Name",
+					 crash_window_name_te, mainLayout, 6);
 		//Crash Window Class
-		createGridStringProperty(crash_window_class_lb, "Crash Window Class", crash_window_class_te, mainLayout, 7);
+		createGridStringProperty(crash_window_class_lb,
+					 "Crash Window Class",
+					 crash_window_class_te, mainLayout, 7);
 	}
 
 	//StartQA button
@@ -65,9 +79,10 @@ OBSQAAutomation::OBSQAAutomation(QWidget *parent, bool closable)
 
 	setLayout(mainLayout);
 	resize(300, 300);
-    setWindowTitle("QA Automation");
+	setWindowTitle("QA Automation");
 
-	QObject::connect(start_qa_btn, &QPushButton::clicked, this, &OBSQAAutomation::ButtonClicked);
+	QObject::connect(start_qa_btn, &QPushButton::clicked, this,
+			 &OBSQAAutomation::ButtonClicked);
 
 	QObject::connect(&timer, &QTimer::timeout, this,
 			 &OBSQAAutomation::Update);
@@ -77,25 +92,33 @@ OBSQAAutomation::OBSQAAutomation(QWidget *parent, bool closable)
 		timer.start();
 }
 
-OBSQAAutomation::~OBSQAAutomation() 
+OBSQAAutomation::~OBSQAAutomation()
 {
-	QObject::disconnect(start_qa_btn, &QPushButton::clicked, this, &OBSQAAutomation::ButtonClicked);
+	QObject::disconnect(start_qa_btn, &QPushButton::clicked, this,
+			    &OBSQAAutomation::ButtonClicked);
 	timer.stop();
 	QObject::disconnect(&timer, &QTimer::timeout, this,
-			 &OBSQAAutomation::Update);
+			    &OBSQAAutomation::Update);
 
-
-	QObject::disconnect(scene_name_te, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
-	QObject::disconnect(source_name_te, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
-	QObject::disconnect(steam_gameid_te, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
-	QObject::disconnect(exe_name_te, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
-	QObject::disconnect(window_name_te, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
-	QObject::disconnect(window_class_te, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
-	QObject::disconnect(crash_window_name_te, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
-	QObject::disconnect(crash_window_class_te, &QLineEdit::textChanged, this, &OBSQAAutomation::Update);
+	QObject::disconnect(scene_name_te, &QLineEdit::textChanged, this,
+			    &OBSQAAutomation::Update);
+	QObject::disconnect(source_name_te, &QLineEdit::textChanged, this,
+			    &OBSQAAutomation::Update);
+	QObject::disconnect(steam_gameid_te, &QLineEdit::textChanged, this,
+			    &OBSQAAutomation::Update);
+	QObject::disconnect(exe_name_te, &QLineEdit::textChanged, this,
+			    &OBSQAAutomation::Update);
+	QObject::disconnect(window_name_te, &QLineEdit::textChanged, this,
+			    &OBSQAAutomation::Update);
+	QObject::disconnect(window_class_te, &QLineEdit::textChanged, this,
+			    &OBSQAAutomation::Update);
+	QObject::disconnect(crash_window_name_te, &QLineEdit::textChanged, this,
+			    &OBSQAAutomation::Update);
+	QObject::disconnect(crash_window_class_te, &QLineEdit::textChanged,
+			    this, &OBSQAAutomation::Update);
 }
 
-void OBSQAAutomation::ButtonClicked() 
+void OBSQAAutomation::ButtonClicked()
 {
 	DebugMessage(this, "You just clicked on the box version 2!");
 	// QMessageBox::information(this, "Info", "You just clicked on the box version 2!");
@@ -103,7 +126,8 @@ void OBSQAAutomation::ButtonClicked()
 
 void OBSQAAutomation::Reset()
 {
-	if(config_data != nullptr){
+	if (config_data != nullptr)
+	{
 		obs_data_release(config_data);
 		config_data = nullptr;
 	}
@@ -113,58 +137,81 @@ void OBSQAAutomation::Reset()
 
 void OBSQAAutomation::Update()
 {
-	if(config_data == nullptr)
+	if (config_data == nullptr)
 		return;
 
 	obs_log(LOG_INFO, "Update");
 
-	const char* scene_name = obs_data_get_string(config_data, "scene_name");
-	const char* source_name = obs_data_get_string(config_data, "source_name");
-	const char* steam_gameid = obs_data_get_string(config_data, "steam_gameid");
-	const char* exe_name = obs_data_get_string(config_data, "exe_name");
-	const char* window_name = obs_data_get_string(config_data, "window_name");
-	const char* window_class = obs_data_get_string(config_data, "window_class");
-	const char* crash_window_name = obs_data_get_string(config_data, "crash_window_name");
-	const char* crash_window_class = obs_data_get_string(config_data, "crash_window_class");
+	const char *scene_name = obs_data_get_string(config_data, "scene_name");
+	const char *source_name =
+		obs_data_get_string(config_data, "source_name");
+	const char *steam_gameid =
+		obs_data_get_string(config_data, "steam_gameid");
+	const char *exe_name = obs_data_get_string(config_data, "exe_name");
+	const char *window_name =
+		obs_data_get_string(config_data, "window_name");
+	const char *window_class =
+		obs_data_get_string(config_data, "window_class");
+	const char *crash_window_name =
+		obs_data_get_string(config_data, "crash_window_name");
+	const char *crash_window_class =
+		obs_data_get_string(config_data, "crash_window_class");
 
-	if(!CompareLineEditWithConfig(scene_name_te, scene_name))
+	if (!CompareLineEditWithConfig(scene_name_te, scene_name))
 	{
-		obs_data_set_string(config_data, "scene_name", scene_name_te->text().toStdString().c_str());
+		obs_data_set_string(
+			config_data, "scene_name",
+			scene_name_te->text().toStdString().c_str());
 	}
-	if(!CompareLineEditWithConfig(source_name_te, source_name))
+	if (!CompareLineEditWithConfig(source_name_te, source_name))
 	{
-		obs_data_set_string(config_data, "source_name", source_name_te->text().toStdString().c_str());
+		obs_data_set_string(
+			config_data, "source_name",
+			source_name_te->text().toStdString().c_str());
 	}
-	if(!CompareLineEditWithConfig(steam_gameid_te, steam_gameid))
+	if (!CompareLineEditWithConfig(steam_gameid_te, steam_gameid))
 	{
-		obs_data_set_string(config_data, "steam_gameid", steam_gameid_te->text().toStdString().c_str());
+		obs_data_set_string(
+			config_data, "steam_gameid",
+			steam_gameid_te->text().toStdString().c_str());
 	}
-	if(!CompareLineEditWithConfig(exe_name_te, exe_name))
+	if (!CompareLineEditWithConfig(exe_name_te, exe_name))
 	{
-		obs_data_set_string(config_data, "exe_name", exe_name_te->text().toStdString().c_str());
+		obs_data_set_string(config_data, "exe_name",
+				    exe_name_te->text().toStdString().c_str());
 	}
-	if(!CompareLineEditWithConfig(window_name_te, window_name))
+	if (!CompareLineEditWithConfig(window_name_te, window_name))
 	{
-		obs_data_set_string(config_data, "window_name", window_name_te->text().toStdString().c_str());
+		obs_data_set_string(
+			config_data, "window_name",
+			window_name_te->text().toStdString().c_str());
 	}
-	if(!CompareLineEditWithConfig(window_class_te, window_class))
+	if (!CompareLineEditWithConfig(window_class_te, window_class))
 	{
-		obs_data_set_string(config_data, "window_class", window_class_te->text().toStdString().c_str());
+		obs_data_set_string(
+			config_data, "window_class",
+			window_class_te->text().toStdString().c_str());
 	}
-	if(!CompareLineEditWithConfig(crash_window_name_te, crash_window_name))
+	if (!CompareLineEditWithConfig(crash_window_name_te, crash_window_name))
 	{
-		obs_data_set_string(config_data, "crash_window_name", crash_window_name_te->text().toStdString().c_str());
+		obs_data_set_string(
+			config_data, "crash_window_name",
+			crash_window_name_te->text().toStdString().c_str());
 	}
-	if(!CompareLineEditWithConfig(crash_window_class_te, crash_window_class))
+	if (!CompareLineEditWithConfig(crash_window_class_te,
+				       crash_window_class))
 	{
-		obs_data_set_string(config_data, "crash_window_class", crash_window_class_te->text().toStdString().c_str());
+		obs_data_set_string(
+			config_data, "crash_window_class",
+			crash_window_class_te->text().toStdString().c_str());
 	}
-
 }
 
-void OBSQAAutomation::SetSettings(obs_data_t* settings){
+void OBSQAAutomation::SetSettings(obs_data_t *settings)
+{
 
-	if(config_data != nullptr){
+	if (config_data != nullptr)
+	{
 		obs_data_release(config_data);
 		config_data = nullptr;
 	}
@@ -172,19 +219,26 @@ void OBSQAAutomation::SetSettings(obs_data_t* settings){
 	config_data = settings;
 	obs_data_addref(config_data);
 
-	if(config_data == nullptr){
+	if (config_data == nullptr)
+	{
 		obs_log(LOG_INFO, "ConfigData is null");
 		return;
 	}
 
-	const char* scene_name = obs_data_get_string(config_data, "scene_name");
-	const char* source_name = obs_data_get_string(config_data, "source_name");
-	const char* steam_gameid = obs_data_get_string(config_data, "steam_gameid");
-	const char* exe_name = obs_data_get_string(config_data, "exe_name");
-	const char* window_name = obs_data_get_string(config_data, "window_name");
-	const char* window_class = obs_data_get_string(config_data, "window_class");
-	const char* crash_window_name = obs_data_get_string(config_data, "crash_window_name");
-	const char* crash_window_class = obs_data_get_string(config_data, "crash_window_class");
+	const char *scene_name = obs_data_get_string(config_data, "scene_name");
+	const char *source_name =
+		obs_data_get_string(config_data, "source_name");
+	const char *steam_gameid =
+		obs_data_get_string(config_data, "steam_gameid");
+	const char *exe_name = obs_data_get_string(config_data, "exe_name");
+	const char *window_name =
+		obs_data_get_string(config_data, "window_name");
+	const char *window_class =
+		obs_data_get_string(config_data, "window_class");
+	const char *crash_window_name =
+		obs_data_get_string(config_data, "crash_window_name");
+	const char *crash_window_class =
+		obs_data_get_string(config_data, "crash_window_class");
 
 	SetTextWithoutNotifying(scene_name_te, scene_name);
 	SetTextWithoutNotifying(source_name_te, source_name);
@@ -198,6 +252,7 @@ void OBSQAAutomation::SetSettings(obs_data_t* settings){
 	SetTextWithoutNotifying(crash_window_class_te, crash_window_class);
 }
 
-obs_data_t* OBSQAAutomation::GetSettings(){
+obs_data_t *OBSQAAutomation::GetSettings()
+{
 	return nullptr;
 }

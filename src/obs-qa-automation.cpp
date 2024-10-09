@@ -32,32 +32,34 @@ OBS_MODULE_USE_DEFAULT_LOCALE(PLUGIN_NAME, "en-US")
 
 #define CONFIG_FILE "obs_qa_automation.json"
 
-obs_data_t* config_settings;
-OBSQAAutomation* widget;
+obs_data_t *config_settings;
+OBSQAAutomation *widget;
 
 bool obs_module_load(void)
 {
 	QWidget *main_window = (QWidget *)obs_frontend_get_main_window();
 	//obs_frontend_push_ui_translation(obs_module_get_string);
 	widget = new OBSQAAutomation(main_window);
-	obs_frontend_add_dock_by_id(
-		"obs-qa-automation",
-		widget->windowTitle().toStdString().c_str(), widget);
+	obs_frontend_add_dock_by_id("obs-qa-automation",
+				    widget->windowTitle().toStdString().c_str(),
+				    widget);
 	//obs_frontend_pop_ui_translation();
 
 	obs_log(LOG_INFO, "plugin loaded successfully (version %s)",
 		PLUGIN_VERSION);
 
-	char* config_dir = obs_module_config_path(NULL);
-	if (config_dir) {
+	char *config_dir = obs_module_config_path(NULL);
+	if (config_dir)
+	{
 		os_mkdirs(config_dir);
 	}
 	bfree(config_dir);
 
-	char* settings_json = obs_module_config_path(CONFIG_FILE);
-	if(!os_file_exists(settings_json)){
+	char *settings_json = obs_module_config_path(CONFIG_FILE);
+	if (!os_file_exists(settings_json))
+	{
 
-		obs_log(LOG_INFO,"%s does not exist", settings_json);
+		obs_log(LOG_INFO, "%s does not exist", settings_json);
 		OBSDataAutoRelease data = obs_data_create();
 		obs_data_set_string(data, "scene_name", "");
 		obs_data_set_string(data, "source_name", "");
@@ -76,15 +78,17 @@ bool obs_module_load(void)
 		// obs_data_set_string(data, "win_class", "SDL_app");
 		// obs_data_set_string(data, "crash_win_name", "Adventure Game Studio");
 		// obs_data_set_string(data, "crash_win_class", "#32770");
-		
+
 		obs_data_save_json(data, settings_json);
 
 		obs_log(LOG_INFO, "Created new settings file");
 	}
-	
-	if(os_file_exists(settings_json)){
+
+	if (os_file_exists(settings_json))
+	{
 		config_settings = obs_data_create_from_json_file(settings_json);
-		const char* data_str = obs_data_get_json_pretty(config_settings);
+		const char *data_str =
+			obs_data_get_json_pretty(config_settings);
 		obs_log(LOG_INFO, "plugin settings: %s", data_str);
 		widget->SetSettings(config_settings);
 	}
@@ -96,7 +100,7 @@ bool obs_module_load(void)
 void obs_module_unload(void)
 {
 	obs_log(LOG_INFO, "plugin unloaded");
-	char* settings_json = obs_module_config_path(CONFIG_FILE);
+	char *settings_json = obs_module_config_path(CONFIG_FILE);
 	obs_data_save_json(config_settings, settings_json);
 	bfree(settings_json);
 	widget->Reset();
@@ -112,3 +116,5 @@ const char *obs_module_description(void)
 {
 	return obs_module_text("Description");
 }
+
+void SomeFunc() {}
