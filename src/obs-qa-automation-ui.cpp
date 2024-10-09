@@ -67,7 +67,7 @@ OBSQAAutomation::OBSQAAutomation(QWidget *parent, bool closable)
 	resize(300, 300);
     setWindowTitle("QA Automation");
 
-	QObject::connect(this->start_qa_btn, SIGNAL(clicked()), SLOT(ButtonClicked()));
+	QObject::connect(start_qa_btn, &QPushButton::clicked, this, &OBSQAAutomation::ButtonClicked);
 
 	QObject::connect(&timer, &QTimer::timeout, this,
 			 &OBSQAAutomation::Update);
