@@ -2,7 +2,7 @@
 /*
 
 # Except for default project files
-!/.vscode/launch.json
+!/.vscode
 !/.github
 !/build-aux
 !/cmake
