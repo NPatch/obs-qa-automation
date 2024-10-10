@@ -71,7 +71,7 @@
             },
             "cacheVariables": {
                 "CMAKE_SYSTEM_VERSION": "10.0.18363.657",
-                "CMAKE_INSTALL_PREFIX": "C:/Program Files/obs-studio"
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/../../obs-studio"
             }
         },
         {

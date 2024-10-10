@@ -6,8 +6,7 @@ param(
     [string] $Configuration = 'RelWithDebInfo',
     [switch] $SkipAll,
     [switch] $SkipBuild,
-    [switch] $SkipDeps,
-    [switch] $SkipOBSInstall
+    [switch] $SkipDeps
 )
 
 $ErrorActionPreference = 'Stop'
@@ -99,22 +98,13 @@ function Build {
     Log-Group "Install ${ProductName}..."
     Invoke-External cmake @CmakeInstallArgs
 
-    $CMakePresetsFile = "${ProjectRoot}/CMakePresets.json"
-    $CMakePresets = Get-Content -Path ${CMakePresetsFile} -Raw | ConvertFrom-Json
-
-    $INSTALLPATH = $CMakePresets.configurePresets[3].cacheVariables.CMAKE_INSTALL_PREFIX
-    $CmakeOBSInstallArgs = @()
-    if(!($SkipOBSInstall)){
-        
-        $CmakeOBSInstallArgs += @(
+    $CmakeOBSInstallArgs = @(
             '--install', "build_${Target}"
             '--prefix', "${INSTALLPATH}"
             '--config', $Configuration
         )
-
-        Log-Group "Install ${ProductName}..."
-        Invoke-External cmake @CmakeOBSInstallArgs
-    }
+    Log-Group "Install ${ProductName}..."
+    Invoke-External cmake @CmakeOBSInstallArgs
 
     Pop-Location -Stack BuildTemp
     Log-Group
