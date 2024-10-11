@@ -4,9 +4,76 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "echo",
+            "type": "cmake",
+            "label": "CMake: configure",
+            "command": "configure",
+            "preset": "${command:cmake.activeConfigurePresetName}",
+            "dependsOn": [
+                "cmake"
+            ]
+        },
+        {
+            "type": "cmake",
+            "label": "CMake: build",
+            "command": "build",
+            "preset": "${command:cmake.activeBuildPresetName}",
+            "dependsOn": [
+                "CMake: configure"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "cmake",
+            "label": "CMake: install",
+            "command": "install",
+            "preset": "${command:cmake.activeInstallPresetName}",
+            "dependsOn": [
+                "CMake: build"
+            ]
+        },
+        {
+            "type": "cmake",
+            "label": "CMake: install",
+            "command": "install",
+            "preset": "${command:cmake.activeInstallPresetName}",
+            "dependsOn": [
+                "CMake: build"
+            ]
+        },
+        {
             "type": "shell",
-            "command": "echo Hello"
+            "label": "Archive",
+            "command": "Compress-Archive",
+            "args": [
+                "-Force",
+                "-Path",
+                "${workspaceFolder}/release/RelWithDebInfo/*",
+                "-DestinationPath",
+                "${workspaceFolder}/release/obs-qa-automation-0.0.1-windows-x64.zip"
+            ],
+            "dependsOn": [
+                "CMake: build"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "Build Installer",
+            "command": ".github/scripts/Package-Windows.ps1",
+            "args": [
+                "-BuildInstaller"
+            ],
+            "presentation": {
+                "focus": true,
+                "reveal": "always",
+                "clear": false,
+                "panel": "shared",
+                "close": true,
+                "showReuseMessage": false,
+            },
         }
     ]
 }
