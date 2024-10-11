@@ -14,24 +14,6 @@
 		}
 	],
 	"settings": {
-		"terminal.integrated.profiles.windows": {
-			"PowerShell": {
-				"source": "PowerShell",
-				"icon": "terminal-powershell",
-				"args": [
-					"-ExecutionPolicy",
-					"Bypass"
-				]
-			},
-			"Command Prompt": {
-				"path": [
-					"${env:windir}\\Sysnative\\cmd.exe",
-					"${env:windir}\\System32\\cmd.exe"
-				],
-				"args": [],
-				"icon": "terminal-cmd"
-			}
-		},
 		"git.enabled": false,
 		"livePreview.autoRefreshPreview": "Never",
 		"editor.formatOnSave": true,
@@ -44,11 +26,19 @@
 		"C_Cpp.vcFormat.newLine.beforeOpenBrace.type": "newLine",
 		"C_Cpp.vcFormat.newLine.closeBraceSameLine.emptyFunction": true,
 		"C_Cpp.vcFormat.newLine.closeBraceSameLine.emptyType": true,
-		"C_Cpp.vcFormat.newLine.scopeBracesOnSeparateLines": true
+		"C_Cpp.vcFormat.newLine.scopeBracesOnSeparateLines": true,
+		"terminal.integrated.profiles.windows": {
+			"PowerShell": {
+				"source": "PowerShell"
+			}
+		},
 	},
 	"extensions": {
 		"recommendations": [
 			"xaver.clang-format"
+		],
+		"unwantedRecommendations": [
+			"ms-vscode.powershell"
 		]
 	}
 }
