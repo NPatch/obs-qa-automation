@@ -18,6 +18,16 @@ function(_check_dependencies_windows)
   set(obs-studio_destination "obs-studio-VERSION")
   set(dependencies_list prebuilt qt6 obs-studio)
 
+  ##############################################################################
+  # OBS-Studio-30.2.3-Windows
+  set(obs-studio-testing_filename "OBS-Studio-VERSION-Windows.zip")
+  set(obs-studio-testing_destination "obs-studio-VERSION-testing")
+  # OBS-Studio-30.2.3-Windows-PDBs
+  set(obs-studio-testing-pdbs_filename "OBS-Studio-VERSION-Windows-PDBs.zip")
+  set(obs-studio-testing-pdbs_destination "obs-studio-VERSION-testing")
+  list(APPEND dependencies_list obs-studio-testing obs-studio-testing-pdbs)
+  ##############################################################################
+
   _check_dependencies()
 endfunction()
 

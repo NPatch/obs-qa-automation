@@ -9,6 +9,22 @@
                 "windows-x64": "a75de0a777013ae5edca526e21b584176bf21606d4d5db23ba4b5a87cfde12e3"
             }
         },
+        "obs-studio-testing": {
+            "version": "30.2.3",
+            "baseUrl": "https://github.com/obsproject/obs-studio/releases/download/",
+            "label": "OBS testing prebuilt",
+            "hashes": {
+                "windows-x64": "c5bf721258f6d8b2342ed39f04e65cdd3a07a9d1300654471d4be91d87fee65b"
+            }
+        },
+        "obs-studio-testing-pdbs": {
+            "version": "30.2.3",
+            "baseUrl": "https://github.com/obsproject/obs-studio/releases/download/",
+            "label": "OBS testing prebuilt pdbs",
+            "hashes": {
+                "windows-x64": "6e6bbb80287201b9a72c23970f3d705715bf5df01306fe817fad3089711860da"
+            }
+        },
         "prebuilt": {
             "version": "2024-09-12",
             "baseUrl": "https://github.com/obsproject/obs-deps/releases/download",

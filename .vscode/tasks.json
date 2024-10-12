@@ -36,15 +36,6 @@
             ]
         },
         {
-            "type": "cmake",
-            "label": "CMake: install",
-            "command": "install",
-            "preset": "${command:cmake.activeInstallPresetName}",
-            "dependsOn": [
-                "CMake: build"
-            ]
-        },
-        {
             "type": "shell",
             "label": "Archive",
             "command": "Compress-Archive",

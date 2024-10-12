@@ -8,10 +8,10 @@
             "name": "(Windows) Launch",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}\\..\\..\\obs-studio\\bin\\64bit\\obs64.exe",
+            "program": "${workspaceFolder}\\.deps\\obs-studio-30.2.3-testing\\bin\\64bit\\obs64.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}\\..\\..\\obs-studio\\bin\\64bit\\",
+            "cwd": "${workspaceFolder}\\.deps\\obs-studio-30.2.3-testing\\bin\\64bit\\",
             "environment": []
         },
         {
