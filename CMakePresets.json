@@ -71,6 +71,7 @@
             },
             "cacheVariables": {
                 "CMAKE_SYSTEM_VERSION": "10.0.18363.657",
+                "CMAKE_CONFIGURE_ARGS": "--fresh",
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/.deps/obs-studio-30.2.3-testing"
             }
         },
