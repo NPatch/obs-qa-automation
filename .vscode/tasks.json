@@ -37,34 +37,50 @@
         },
         {
             "type": "shell",
-            "label": "Archive",
-            "command": "Compress-Archive",
-            "args": [
-                "-Force",
-                "-Path",
-                "${workspaceFolder}/release/RelWithDebInfo/*",
-                "-DestinationPath",
-                "${workspaceFolder}/release/obs-qa-automation-0.0.1-windows-x64.zip"
-            ],
-            "dependsOn": [
-                "CMake: build"
-            ]
-        },
-        {
-            "type": "shell",
-            "label": "Build Installer",
-            "command": ".github/scripts/Package-Windows.ps1",
-            "args": [
-                "-BuildInstaller"
-            ],
+            "label": "Release: Archive",
+            "windows": {
+                "command": "pwsh",
+                "args": [
+                    "-Command",
+                    "${workspaceFolder}/build-aux/Install-Windows.ps1",
+                    "-Intent",
+                    "Archive",
+                    // "-Debug"
+                ]
+            },
+            "problemMatcher": [],
             "presentation": {
                 "focus": true,
                 "reveal": "always",
                 "clear": false,
                 "panel": "shared",
-                "close": true,
+                "close": false,
                 "showReuseMessage": false,
+
+            }
+        },
+        {
+            "type": "shell",
+            "label": "Release: Build Installer",
+            "windows": {
+                "command": "pwsh",
+                "args": [
+                    "-Command",
+                    "${workspaceFolder}/build-aux/Install-Windows.ps1",
+                    "-Intent",
+                    "Installer",
+                    // "-Debug"
+                ]
             },
+            "problemMatcher": [],
+            "presentation": {
+                "focus": true,
+                "reveal": "always",
+                "clear": false,
+                "panel": "shared",
+                "close": false,
+                "showReuseMessage": false,
+            }
         }
     ]
 }
