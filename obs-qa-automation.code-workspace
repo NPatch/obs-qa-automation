@@ -31,7 +31,7 @@
 			"PowerShell": {
 				"source": "PowerShell"
 			}
-		},
+		}
 	},
 	"extensions": {
 		"recommendations": [

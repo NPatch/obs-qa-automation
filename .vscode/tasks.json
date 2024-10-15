@@ -43,9 +43,9 @@
                 "args": [
                     "-Command",
                     "${workspaceFolder}/build-aux/Install-Windows.ps1",
+                    // "-Debug",
                     "-Intent",
-                    "Archive",
-                    // "-Debug"
+                    "Archive"
                 ]
             },
             "problemMatcher": [],
@@ -55,8 +55,7 @@
                 "clear": false,
                 "panel": "shared",
                 "close": false,
-                "showReuseMessage": false,
-
+                "showReuseMessage": false
             }
         },
         {
@@ -67,9 +66,9 @@
                 "args": [
                     "-Command",
                     "${workspaceFolder}/build-aux/Install-Windows.ps1",
+                    // "-Debug",
                     "-Intent",
-                    "Installer",
-                    // "-Debug"
+                    "Installer"
                 ]
             },
             "problemMatcher": [],
@@ -79,7 +78,7 @@
                 "clear": false,
                 "panel": "shared",
                 "close": false,
-                "showReuseMessage": false,
+                "showReuseMessage": false
             }
         }
     ]
